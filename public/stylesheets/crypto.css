@@ -25,3 +25,22 @@ body {
     cursor: inherit;
     display: block;
 }
+
+html,
+body {
+  height: 100%;
+}
+
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -60px;
+  padding: 0 0 60px;
+}
+
+#footer {
+  font-size: 44px;
+  height: 60px;
+  background-color: #DFDFDF;
+}

@@ -13,15 +13,19 @@ app.controller('mainCtrl', ['$scope', '$http',
 
         $scope.upload = function() {
             $scope.files.forEach(function(e) {
-                e.uploading = true;
-                $http.uploadFile({
-                    url: 'api/file',
-                    file: e,
-                    data: {key: $scope.key}
-                }).success(function(data) {
-                    e.uploading = false;
-                    e.link = data;
-                });
+                if (typeof e.uploading === 'undefined') {
+                    e.uploading = true;
+                    $http.uploadFile({
+                        url: 'api/file',
+                        file: e,
+                        data: {
+                            key: $scope.key
+                        }
+                    }).success(function(data) {
+                        e.uploading = false;
+                        e.link = data;
+                    });
+                }
             })
         }
 

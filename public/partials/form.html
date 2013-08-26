@@ -3,8 +3,10 @@
   <ul class="list-group">
     <li ng-repeat="file in files" class="list-group-item">
         <a ng-href="{{file.link}}">{{file.name}}</a>
-        <i ng-show="file.uploading"class="icon-refresh icon-spin icon-large pull-right"></i>
-        <span ng-hide="! file.link" class="glyphicon glyphicon-ok pull-right"></span>
+        <i ng-show="file.uploading" class="icon-refresh icon-spin icon-large pull-left"></i>
+        <i ng-hide="! file.link" class="icon-ok pull-left"></i>
+        <a ng-hide="! file.link" twitter data-text="Crypto file: {{file.name}}" class="pull-right" data-url="http://127.0.0.1:3000/{{file.link}}"></a>
+
     </li>
   </ul>
 </div>

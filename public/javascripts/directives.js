@@ -15,7 +15,7 @@ directives.directive('ngFileSelect', ['$parse', '$http',
 
                     var formData = new FormData();
                     formData.append('file', config.file);
-                    for (var key in config.data) {                        
+                    for (var key in config.data) {
                         formData.append(key, config.data[key]);
                     }
                     return formData;
@@ -39,5 +39,28 @@ directives.directive('ngFileSelect', ['$parse', '$http',
                 });
             });
         };
+    }
+]);
+
+directives.directive('twitter', [
+    function() {
+        return {
+            link: function(scope, element, attr) {
+                setTimeout(function() {
+                    attr.$observe('url', function(value) {
+                        twttr.widgets.createShareButton(
+                            value,
+                            element[0],
+                            function(el) {
+                                console.log(el)
+                            }, {
+                                count: 'none',
+                                text: attr.text
+                            }
+                        );
+                    });
+                });
+            }
+        }
     }
 ]);

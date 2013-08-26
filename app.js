@@ -22,7 +22,6 @@ app.use(express.static(path.join(__dirname, 'public'), {
 }));
 
 app.post('/api/file', function(req, res) {
-    console.log(typeof req.body.key);
     var key = req.body.key;
     encryptor.encryptFile(req.files.file.path, 'uploads/' + req.files.file.path.slice(4) + '.aes', key, options, function(err) {
         fs.unlink(req.files.file.path, function() {
