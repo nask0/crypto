@@ -1,0 +1,9 @@
+<div ng-show="files.length > 0" class="panel panel-default">
+  <div class="panel-heading">Files to be encrypted:</div>
+  <ul class="list-group">
+    <li ng-repeat="file in files" class="list-group-item">
+        <a ng-href="{{file.link}}">{{file.name}}</a>
+        <span ng-hide="! file.link" class="label label-success pull-right">Encrypted</span>
+    </li>
+  </ul>
+</div>
