@@ -6,6 +6,7 @@ lib-cov
 *.out
 *.pid
 *.gz
+*.aes
 
 pids
 logs
@@ -14,5 +15,3 @@ results
 npm-debug.log
 node_modules/
 conf/
-uploads/
-tmp/
