@@ -7,11 +7,6 @@ var options = {
     algorithm: 'aes-256-cbc'
 };
 
-//var cipher = crypto.createCipher("aes-256-cbc", 'asd');
-//var text = "123|123123123123123";
-//var crypted = cipher.update(text,'binary','hex');
-//crypted += cipher.final('hex');
-
 var app = express();
 
 app.set('port', process.env.PORT || 3000);
