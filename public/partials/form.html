@@ -3,6 +3,7 @@
   <ul class="list-group">
     <li ng-repeat="file in files" class="list-group-item">
         <a ng-href="{{file.link}}">{{file.name}}</a>
+        <i ng-show="file.uploading"class="icon-refresh icon-spin icon-large pull-right"></i>
         <span ng-hide="! file.link" class="glyphicon glyphicon-ok pull-right"></span>
     </li>
   </ul>

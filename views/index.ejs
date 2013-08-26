@@ -4,6 +4,7 @@
     <title>crypto</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
     <link rel="stylesheet" href="stylesheets/crypto.css">
     <script src="http://code.angularjs.org/1.2.0rc1/angular.min.js"></script>
     <script src="javascripts/app.js"></script>
@@ -13,7 +14,8 @@
   <body>
     <div class="container" ng-controller="mainCtrl">
         <div class="row">
-        <h2 class="text-center"><strong>AES-256</strong> File Encryption</h2>
+        <h2 class="text-center"><i class="icon-lock"></i> <strong>AES-256</strong> File Encryption</h2>
+        <h4 class="text-center">only encrypted version of the files are stored</h4>
           <div class="col-lg-4">
             <span class="btn btn-default btn-lg btn-block btn-file">
               <span class="glyphicon glyphicon-folder-open"></span> <input type="file" ng-file-select="onFileSelect(files)" multiple>
