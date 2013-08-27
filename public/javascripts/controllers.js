@@ -23,7 +23,6 @@ app.controller('mainCtrl', ['$scope', '$http',
                         }
                     }).success(function(data) {
                         e.uploading = false;
-                        console.log(data)
                         e.id = data;
                     });
                 }

@@ -52,7 +52,7 @@ directives.directive('twitter', [
                             value,
                             element[0],
                             function(el) {}, {
-                                count: 'none',
+                                count: 'yes',
                                 text: attr.text
                             }
                         );
@@ -68,10 +68,12 @@ directives.directive('gplus', [
         return {
             link: function(scope, element, attr) {
                 setTimeout(function() {
-                    attr.$observe('url', function(value) {
-                        console.log(attr)
-                        gapi.plus.render(
-                            element[0], {}
+                    attr.$observe('href', function(value) {
+                        gapi.plusone.render(
+                            element[0], {
+                                href: value,
+                                size: 'medium'
+                            }
                         )
                     });
                 });

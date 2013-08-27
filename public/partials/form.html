@@ -6,7 +6,7 @@
         <i ng-show="file.uploading" class="icon-refresh icon-spin icon-large pull-left"></i>
         <i ng-hide="! file.id" class="icon-ok pull-left"></i>
         <a ng-hide="! file.id" twitter data-text="Crypto file: {{file.name}}" class="pull-right" data-url="http://127.0.0.1:3000/file/{{file.id}}"></a>
-        <!--<div ng-hide="! file.id" gplus class="g-plus" data-action="share" data-href="http://127.0.0.1:3000/{{file.id}}" data-annotation="none"></div>-->
+        <a ng-hide="! file.id" class="pull-right" gplus href="http://127.0.0.1:3000/file/{{file.id}}"></a>
     </li>
   </ul>
 </div>
