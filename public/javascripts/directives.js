@@ -52,7 +52,7 @@ directives.directive('twitter', [
                             value,
                             element[0],
                             function(el) {}, {
-                                count: 'yes',
+                                count: 'none',
                                 text: attr.text
                             }
                         );
@@ -72,7 +72,8 @@ directives.directive('gplus', [
                         gapi.plusone.render(
                             element[0], {
                                 href: value,
-                                size: 'medium'
+                                size: "medium",
+                                annotation: "none"
                             }
                         )
                     });

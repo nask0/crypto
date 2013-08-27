@@ -7,6 +7,10 @@ body {
     margin-top: 10%;
 }
 
+.social {
+    margin-right: 10px !important;
+}
+
 .btn-file {
     position: relative;
     overflow: hidden;
