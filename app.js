@@ -19,29 +19,24 @@ app.set('view engine', 'ejs');
 app.use(express.bodyParser({
     uploadDir: './tmp',
     keepExtensions: true,
-    limit: '100mb',
-    defer: true
+    limit: '100mb'
 }));
 app.use(express.methodOverride());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.post('/file', function(req, res) {
     var key = req.body.key;
-    var writestream = gfs.createWriteStream();
-    req.files.file.pipe(new cipherstream.CipherStream(key, "aes-256-cbc")).pipe(writestream.on('close', function(file) {
-        fs.unlink(req.files.file.path, function() {});
+    var writestream = gfs.createWriteStream({
+        filename: req.files.file.name
+    });
+    fs.createReadStream(req.files.file.path).pipe(new cipherstream.CipherStream(key, "aes-256-cbc")).pipe(writestream.on('close', function(file) {
+        fs.unlink(req.files.file.path);
         res.send(file._id.toString())
     }));
 
 });
 
 app.get('/file/:id', function(req, res) {
-    gfs.files.find({
-        id: req.params.id
-    }).toArray(function(err, files) {
-        console.log(files);
-    });
-
     var readstream = gfs.createReadStream({
         _id: req.params.id
     });
