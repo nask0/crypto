@@ -48,8 +48,9 @@ directives.directive('twitter', [
             link: function(scope, element, attr) {
                 setTimeout(function() {
                     attr.$observe('url', function(value) {
+                        console.log(attr)
                         twttr.widgets.createShareButton(
-                            value,
+                            element[0].baseURI + value,
                             element[0],
                             function(el) {}, {
                                 count: 'none',
@@ -71,7 +72,7 @@ directives.directive('gplus', [
                     attr.$observe('href', function(value) {
                         gapi.plusone.render(
                             element[0], {
-                                href: value,
+                                href: element[0].baseURI + value,
                                 size: "medium",
                                 annotation: "none"
                             }
