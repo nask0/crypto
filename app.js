@@ -40,7 +40,7 @@ app.get('/file/:id', function(req, res) {
     var readstream = gfs.createReadStream({
         _id: req.params.id
     });
-    res.attachment(readstream);
+    res.attachment();
     readstream.pipe(res);
 });
 
