@@ -51,13 +51,28 @@ directives.directive('twitter', [
                         twttr.widgets.createShareButton(
                             value,
                             element[0],
-                            function(el) {
-                                console.log(el)
-                            }, {
+                            function(el) {}, {
                                 count: 'none',
                                 text: attr.text
                             }
                         );
+                    });
+                });
+            }
+        }
+    }
+]);
+
+directives.directive('gplus', [
+    function() {
+        return {
+            link: function(scope, element, attr) {
+                setTimeout(function() {
+                    attr.$observe('url', function(value) {
+                        console.log(attr)
+                        gapi.plus.render(
+                            element[0], {}
+                        )
                     });
                 });
             }

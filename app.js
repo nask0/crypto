@@ -17,9 +17,7 @@ app.use(express.bodyParser({
     limit: '100mb'
 }));
 app.use(express.methodOverride());
-app.use(express.static(path.join(__dirname, 'public'), {
-    maxAge: 31536000000
-}));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.post('/api/file', function(req, res) {
     var key = req.body.key;
