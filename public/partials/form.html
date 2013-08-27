@@ -2,11 +2,11 @@
   <div class="panel-heading text-center">Files to be encrypted:</div>
   <ul class="list-group">
     <li ng-repeat="file in files" class="list-group-item">
-        <a ng-href="{{file.link}}">{{file.name}}</a>
+        <a ng-href="file/{{file.id}}">{{file.name}}</a>
         <i ng-show="file.uploading" class="icon-refresh icon-spin icon-large pull-left"></i>
-        <i ng-hide="! file.link" class="icon-ok pull-left"></i>
-        <a ng-hide="! file.link" twitter data-text="Crypto file: {{file.name}}" class="pull-right" data-url="http://127.0.0.1:3000/{{file.link}}"></a>
-        <!--<div ng-hide="! file.link" gplus class="g-plus" data-action="share" data-href="http://127.0.0.1:3000/{{file.link}}" data-annotation="none"></div>-->
+        <i ng-hide="! file.id" class="icon-ok pull-left"></i>
+        <a ng-hide="! file.id" twitter data-text="Crypto file: {{file.name}}" class="pull-right" data-url="http://127.0.0.1:3000/file/{{file.id}}"></a>
+        <!--<div ng-hide="! file.id" gplus class="g-plus" data-action="share" data-href="http://127.0.0.1:3000/{{file.id}}" data-annotation="none"></div>-->
     </li>
   </ul>
 </div>

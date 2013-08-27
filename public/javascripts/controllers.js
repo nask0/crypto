@@ -16,14 +16,15 @@ app.controller('mainCtrl', ['$scope', '$http',
                 if (typeof e.uploading === 'undefined') {
                     e.uploading = true;
                     $http.uploadFile({
-                        url: 'api/file',
+                        url: 'file',
                         file: e,
                         data: {
                             key: $scope.key
                         }
                     }).success(function(data) {
                         e.uploading = false;
-                        e.link = data;
+                        console.log(data)
+                        e.id = data;
                     });
                 }
             })

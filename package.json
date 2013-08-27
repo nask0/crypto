@@ -6,6 +6,8 @@
   "dependencies": {
     "express": "3.x",
     "ejs": "*",
-    "file-encryptor": "*"
+    "cipherstream": "*",
+    "mongoose": "*",
+    "gridfs-stream": "*"
   }
 }

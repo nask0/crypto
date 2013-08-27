@@ -1,11 +1,16 @@
 var express = require('express'),
     path = require('path'),
     fs = require('fs'),
-    encryptor = require('file-encryptor');
+    mongoose = require('mongoose'),
+    Grid = require('gridfs-stream'),
+    cipherstream = require("cipherstream");
 
-var options = {
-    algorithm: 'aes-256-cbc'
-};
+var conn = mongoose.createConnection('mongodb://localhost/crypto');
+
+var gfs;
+conn.once('open', function() {
+    gfs = Grid(conn.db, mongoose.mongo);
+});
 
 var app = express();
 
@@ -14,23 +19,34 @@ app.set('view engine', 'ejs');
 app.use(express.bodyParser({
     uploadDir: './tmp',
     keepExtensions: true,
-    limit: '100mb'
+    limit: '100mb',
+    defer: true
 }));
 app.use(express.methodOverride());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.post('/api/file', function(req, res) {
+app.post('/file', function(req, res) {
     var key = req.body.key;
-    encryptor.encryptFile(req.files.file.path, 'uploads/' + req.files.file.path.slice(4) + '.aes', key, options, function(err) {
-        fs.unlink(req.files.file.path, function() {
-            if (err) throw err;
-            res.send(200, 'uploads/' + req.files.file.path.slice(4) + '.aes');
-        });
-    });
+    var writestream = gfs.createWriteStream();
+    req.files.file.pipe(new cipherstream.CipherStream(key, "aes-256-cbc")).pipe(writestream.on('close', function(file) {
+        fs.unlink(req.files.file.path, function() {});
+        res.send(file._id.toString())
+    }));
+
 });
 
-app.get('/uploads/:file', function(req, res) {
-    res.download('./uploads/' + req.params.file);
+app.get('/file/:id', function(req, res) {
+    gfs.files.find({
+        id: req.params.id
+    }).toArray(function(err, files) {
+        console.log(files);
+    });
+
+    var readstream = gfs.createReadStream({
+        _id: req.params.id
+    });
+    res.attachment(readstream);
+    readstream.pipe(res);
 });
 
 app.get('/', function(req, res) {
@@ -38,7 +54,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('*', function(req, res) {
-    res.send(404, 'wtf? not found');
+    res.redirect('/');
 });
 
 app.listen(3000);
