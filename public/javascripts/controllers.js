@@ -4,6 +4,8 @@ app.controller('mainCtrl', ['$scope', '$http',
     function($scope, $http) {
         $scope.template = "partials/form.html";
         $scope.files = [];
+        $scope.key = {};
+        
         $scope.onFileSelect = function(files) {
             for (var i = 0; i < files.length; i++) {
                 var file = files[i];
@@ -19,7 +21,7 @@ app.controller('mainCtrl', ['$scope', '$http',
                         url: 'file',
                         file: e,
                         data: {
-                            key: $scope.key
+                            key: $scope.key.value
                         }
                     }).success(function(data) {
                         e.uploading = false;

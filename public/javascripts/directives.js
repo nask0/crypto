@@ -48,7 +48,6 @@ directives.directive('twitter', [
             link: function(scope, element, attr) {
                 setTimeout(function() {
                     attr.$observe('url', function(value) {
-                        console.log(attr)
                         twttr.widgets.createShareButton(
                             element[0].baseURI + value,
                             element[0],

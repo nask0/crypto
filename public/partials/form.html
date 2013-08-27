@@ -1,12 +1,30 @@
-<div ng-show="files.length > 0" class="panel panel-default">
-  <div class="panel-heading text-center">Files to be encrypted:</div>
-  <ul class="list-group">
-    <li ng-repeat="file in files" class="list-group-item">
-        <a ng-href="file/{{file.id}}">{{file.name}}</a>
-        <i ng-show="file.uploading" class="icon-refresh icon-spin icon-large pull-left"></i>
-        <i ng-hide="! file.id" class="icon-ok pull-left"></i>
-        <a ng-hide="! file.id" twitter data-text="Crypto file: {{file.name}}" class="pull-right social" data-url="file/{{file.id}}"> </a>
-        <a ng-hide="! file.id" class="pull-right social" gplus href="file/{{file.id}}"> </a>
-    </li>
-  </ul>
+<div class="row">          
+  <div class="col-lg-4">
+    <span class="btn btn-default btn-lg btn-block btn-file">
+      <span class="glyphicon glyphicon-folder-open"></span> <input type="file" ng-file-select="onFileSelect(files)" multiple>
+    </span>
+  </div>
+  <div class="col-lg-4">
+    <input type="password" class="form-control input-lg" ng-model="key.value" placeholder="Ultra secret key">
+  </div>
+  <div class="col-lg-4">
+    <button class="btn btn-default btn-block btn-lg" ng-disabled="uploadCheck()" ng-click="upload()"><span class="glyphicon glyphicon-cloud-upload"></span> </button>
+  </div>
+</div>
+
+<div id="main" class="row">
+    <div class="col-lg-12">
+      <div ng-show="files.length > 0" class="panel panel-default">
+        <div class="panel-heading text-center">Files to be encrypted:</div>
+        <ul class="list-group">
+          <li ng-repeat="file in files" class="list-group-item">
+              <a ng-href="file/{{file.id}}">{{file.name}}</a>
+              <i ng-show="file.uploading" class="icon-refresh icon-spin icon-large pull-left"></i>
+              <i ng-hide="! file.id" class="icon-ok pull-left"></i>
+              <a ng-hide="! file.id" twitter data-text="Crypto file: {{file.name}}" class="pull-right social" data-url="file/{{file.id}}"> </a>
+              <a ng-hide="! file.id" class="pull-right social" gplus href="file/{{file.id}}"> </a>
+          </li>
+        </ul>
+      </div>
+  </div>
 </div>
