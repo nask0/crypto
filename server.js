@@ -20,7 +20,7 @@ app.use(express.bodyParser({
 app.use(express.methodOverride());
 app.use(express.static(path.join(__dirname, 'public')));
 app.post('/file', function(req, res) {
-    console.log(req.files)
+    console.log(req)
     var key = req.body.key;
     var writestream = gfs.createWriteStream({
         filename: req.files.file.name

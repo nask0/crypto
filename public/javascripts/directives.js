@@ -1,21 +1,7 @@
 "use strict";
 var directives = angular.module('crypto.directives', []);
 directives.directive('ngFileSelect', ['$parse', '$http', 'Crypt',
-    function($parse, $http, Crypt) {
-        $http.uploadFile = function(config) {
-            return $http({
-                method: 'POST',
-                url: config.url,
-                headers: {
-                    'Content-Type': false
-                },
-                transformRequest: function() {
-                    var formData = new FormData();
-                    formData.append('file', config.file);
-                    return formData;
-                }
-            });
-        };
+    function($parse) {
         return function(scope, elem, attr) {
             var fn = $parse(attr['ngFileSelect']);
             elem.bind('change', function(evt) {

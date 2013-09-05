@@ -3,34 +3,40 @@ app.controller('mainCtrl', ['$scope', '$http', 'Crypt',
     function($scope, $http, Crypt) {
         $scope.template = "partials/form.html";
         $scope.files = [];
-
+        $scope.key = {};
         $scope.onFileSelect = function(files) {
-            Crypt.init(function(fs) {
-                for (var i = 0; i < files.length; i++) {
-                    Crypt.process(fs, files[i], function(efile) {
-                        $scope.$apply(function() {
-                            $scope.files.push(efile)
-                        });
+            for (var i = 0; i < files.length; i++) {
+                Crypt.bury(files[i], function(blob) {
+                    $scope.$apply(function() {
+                        $scope.files.push(blob)
                     });
-                }
-            })
+                });
+            }
         };
         $scope.upload = function() {
-            $scope.files.forEach(function(e) {
-                if (typeof e.uploading === 'undefined') {
-                    e.uploading = true;
-                    $http.uploadFile({
+            $scope.files.forEach(function(file) {
+                if (typeof file.uploading === 'undefined') {
+                    file.uploading = true;
+                    $http({
+                        method: 'POST',
                         url: 'file',
-                        file: e
+                        headers: {
+                            'Content-Type': false
+                        },
+                        transformRequest: function() {
+                            var formData = new FormData();
+                            formData.append('file', file.blob);
+                            return formData;
+                        }
                     }).success(function(data) {
-                        e.uploading = false;
-                        e.id = data;
+                        file.uploading = false;
+                        file.id = data;
                     });
                 }
             })
         }
         $scope.uploadCheck = function() {
-            return ($scope.files.length == 0 || !$scope.key)
+            return ($scope.files.length == 0 || !$scope.key.value)
         }
     }
 ]);
