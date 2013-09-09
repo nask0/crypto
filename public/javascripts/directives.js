@@ -1,6 +1,6 @@
 "use strict";
 var directives = angular.module('crypto.directives', []);
-directives.directive('ngFileSelect', ['$parse', '$http', 'Crypt',
+directives.directive('ngFileSelect', ['$parse',
     function($parse) {
         return function(scope, elem, attr) {
             var fn = $parse(attr['ngFileSelect']);

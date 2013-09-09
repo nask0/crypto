@@ -1,12 +1,11 @@
 {
-  "name": "angular-auth",
-  "description": "Sample auth system for AngularJS",
+  "name": "crypto",
+  "description": "Sample frontend crypto system",
   "version": "0.0.1",
   "private": true,
   "dependencies": {
     "express": "3.x",
     "ejs": "*",
-    "cipherstream": "*",
     "mongoose": "*",
     "gridfs-stream": "*"
   }

@@ -2,8 +2,7 @@ var express = require('express'),
     path = require('path'),
     fs = require('fs'),
     mongoose = require('mongoose'),
-    Grid = require('gridfs-stream'),
-    cipherstream = require("cipherstream");
+    Grid = require('gridfs-stream');
 var conn = mongoose.createConnection('mongodb://localhost/crypto');
 var gfs;
 conn.once('open', function() {
@@ -20,7 +19,6 @@ app.use(express.bodyParser({
 app.use(express.methodOverride());
 app.use(express.static(path.join(__dirname, 'public')));
 app.post('/file', function(req, res) {
-    console.log(req)
     var key = req.body.key;
     var writestream = gfs.createWriteStream({
         filename: req.files.file.name
@@ -34,8 +32,16 @@ app.get('/file/:id', function(req, res) {
     var readstream = gfs.createReadStream({
         _id: req.params.id
     });
+    res.set({
+        'Content-Type': 'application/octet-stream'
+    })
     res.attachment();
-    readstream.pipe(res);
+    readstream.on("data", function(data) {
+        res.write(data);
+    });
+    readstream.on("end", function() {
+        res.end();
+    });
 });
 app.get('/', function(req, res) {
     res.render('index');
