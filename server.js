@@ -36,12 +36,7 @@ app.get('/file/:id', function(req, res) {
         'Content-Type': 'application/octet-stream'
     })
     res.attachment();
-    readstream.on("data", function(data) {
-        res.write(data);
-    });
-    readstream.on("end", function() {
-        res.end();
-    });
+    readstream.pipe(res);
 });
 app.get('/', function(req, res) {
     res.render('index');

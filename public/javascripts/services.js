@@ -12,9 +12,7 @@ services.service('Crypt', [
                     utf8 += String.fromCharCode(content[i]);
                 }
                 var b64 = btoa(utf8);
-                console.log(content.buffer);
                 var encrypted = GibberishAES.enc(b64, key);
-                //var encrypted = CryptoJS.AES.encrypt(b64, "asd");
                 var blob = new Blob([encrypted], {
                     type: 'application/octet-stream'
                 });

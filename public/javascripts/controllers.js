@@ -4,7 +4,7 @@ app.controller('mainCtrl', ['$scope', '$http', 'Crypt',
         $scope.template = "partials/form.html";
         $scope.files = [];
         $scope.key = {};
-        $scope.onFileSelect = function(files) {
+        $scope.onFile = function(files) {
             for (var i = 0; i < files.length; i++) {
                 Crypt.bury(files[i], $scope.key.value, function(blob) {
                     $scope.$apply(function() {
@@ -35,11 +35,9 @@ app.controller('mainCtrl', ['$scope', '$http', 'Crypt',
                 }
             })
         }
-
         $scope.keyCheck = function() {
             return !$scope.key.value;
         }
-
         $scope.uploadCheck = function() {
             return ($scope.files.length == 0 || !$scope.key.value)
         }
